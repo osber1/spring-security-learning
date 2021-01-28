@@ -1,13 +1,13 @@
 spring:
   jpa:
-    hibernate.ddl-auto: create-delete
+    hibernate.ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
   datasource:
 #    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/notes?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3306/books?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
 #    username: root
 #    password: root
     url: jdbc:h2:mem:testdb
