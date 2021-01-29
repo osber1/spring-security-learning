@@ -1,5 +1,9 @@
 package com.learning.security.repository;
 
-//@Repository
-//public interface BookRepository extends JpaRepository<Integer, Book> {
-//}
+import com.learning.security.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BookRepository extends JpaRepository<Book, Integer> {
+}

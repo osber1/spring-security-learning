@@ -18,6 +18,6 @@ public class BookController {
 
     @GetMapping
     public Collection<Book> getAllBooks() {
-        return service.getALl();
+        return service.getAll();
     }
 }
