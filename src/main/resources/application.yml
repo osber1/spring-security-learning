@@ -7,8 +7,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
 
-
   datasource:
     url: jdbc:mysql://localhost:3306/api_security_db?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root
+
+application.jwt:
+  tokenExpirationAfterDays: 1
+  secret: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecure
+  tokenPrefix: "Bearer "
