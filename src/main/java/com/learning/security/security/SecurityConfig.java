@@ -19,19 +19,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final BooksWsAuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder);
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/books/{id}").access("hasRole('USER') or hasRole('ADMIN') and hasAuthority('GET_BOOK')")
+                .antMatchers("/api/books").access("hasRole('ADMIN') and hasAuthority('MANAGE_BOOK')")
+                .anyRequest().authenticated()
+                .and().httpBasic()
+                .authenticationEntryPoint(authenticationEntryPoint);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .cors()
-                .and()
-                .csrf().disable()
-                .authorizeRequests().anyRequest().authenticated()
-                .and().httpBasic()
-                .authenticationEntryPoint(authenticationEntryPoint);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(encoder);
     }
 }
