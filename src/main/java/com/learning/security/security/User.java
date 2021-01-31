@@ -1,4 +1,4 @@
-package com.learning.security.user;
+package com.learning.security.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

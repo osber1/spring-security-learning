@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -13,8 +14,11 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
 
-    public Book(String title) {
+    public Book(String title, LocalDate releaseDate) {
         this.title = title;
+        this.releaseDate = releaseDate;
     }
 }

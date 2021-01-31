@@ -1,7 +1,5 @@
 package com.learning.security.security;
 
-
-import com.learning.security.jwt.JwtAuthenticationFilter;
 import com.learning.security.jwt.JwtAuthorizationFilter;
 import com.learning.security.jwt.JwtConfig;
 import lombok.AllArgsConstructor;
@@ -21,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtConfig config;
     private final BCryptPasswordEncoder encoder;
     private final UserDetailsService userDetailsService;
-    private final BooksWsAuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,14 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/books/{id}").access("hasRole('USER') or hasRole('ADMIN') and hasAuthority('GET_BOOK')")
                 .antMatchers("/api/books").access("hasRole('ADMIN') and hasAuthority('MANAGE_BOOK')")
                 .anyRequest().authenticated()
-                .and().addFilter(new JwtAuthenticationFilter(authenticationManager(), config))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userDetailsService, config))
+                .and()
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), config))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 }
