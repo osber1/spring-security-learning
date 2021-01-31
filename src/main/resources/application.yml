@@ -1,17 +1,25 @@
+server:
+  ssl:
+    key-store: classpath:serverkeystore.jks
+    key-store-type: JKS
+    key-store-password: topsecret
+    key-alias: tcserver
+
 spring:
   jpa:
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
+
   datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/books?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
-#    username: root
-#    password: root
-    url: jdbc:h2:mem:testdb
+    url: jdbc:mysql://localhost:3306/api_security_db?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+
 application.jwt:
-  secretKey: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecure
+  tokenExpirationAfterDays: 1
+  secret: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecure
   tokenPrefix: "Bearer "
-  tokenExpirationAfterDays: 2
